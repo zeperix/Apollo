@@ -46,9 +46,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
       - name: Setup Release
         id: setup_release
         uses: LizardByte/setup-release-action@v2025.426.225
@@ -271,7 +268,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COMMIT: ${{ needs.setup_release.outputs.release_commit }}
         run: |
-
+          git submodule update --init --recursive
           mkdir -p build
           cmake \
             -B build \
